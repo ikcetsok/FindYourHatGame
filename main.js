@@ -1,3 +1,4 @@
+console.clear();
 const prompt = require("prompt-sync")({ sigint: true });
 
 const hat = "^";
@@ -73,5 +74,28 @@ while (status == 0) {
 
   if (myField.array[playerPosition[0]][playerPosition[1]] == undefined) {
     console.log("You are outside of the grid!");
+  }
+
+  switch (myField.array[playerPosition[0]][playerPosition[1]]) {
+    case undefined:
+      console.log("You are outside of the grid!");
+      status = 1;
+      break;
+
+    case hole:
+      console.log("You fell into a hole!");
+      status = 1;
+      break;
+
+    case fieldCharacter:
+        console.clear();
+      myField.array[playerPosition[0]][playerPosition[1]] = pathCharacter;
+      break;
+
+    case hat:
+      myField.array[playerPosition[0]][playerPosition[1]] = pathCharacter;
+      console.log("You found the hat!");
+      status = 1;
+      break;
   }
 }
