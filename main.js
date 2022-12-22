@@ -23,18 +23,69 @@ class Field {
       console.log(output[i]);
     }
   }
+  static generateField(width, height) {
+    let random = 0;
+    let field = [];
+    let temp = [];
+    let hatPresent = 0;
+    temp[0] = pathCharacter;
+    for (let i = 1; i < width; i++) {
+      if (hatPresent == 0) {
+        random = Math.floor(Math.random() * 3) + 1;
+      } else {
+        random = Math.floor(Math.random() * 2) + 1;
+      }
 
-  static generateField(width, height) {}
+      switch (random) {
+        case 1:
+          temp.push(hole);
+          break;
+        case 2:
+          temp.push(fieldCharacter);
+          break;
+        case 3:
+          temp.push(hat);
+          hatPresent = 1;
+          break;
+      }
+    }
+    field.push(temp);
+    temp = [];
+    for (let j = 1; j < height; j++) {
+      for (let i = 0; i < width; i++) {
+        if (hatPresent == 0) {
+          random = Math.floor(Math.random() * 3) + 1;
+        } else {
+          random = Math.floor(Math.random() * 2) + 1;
+        }
+
+        switch (random) {
+          case 1:
+            temp.push(hole);
+            break;
+          case 2:
+            temp.push(fieldCharacter);
+            break;
+          case 3:
+            temp.push(hat);
+            hatPresent = 1;
+            break;
+        }
+      }
+      field.push(temp);
+      temp = [];
+    }
+
+    return field;
+  }
 }
 
-const myField = new Field([
-  ["*", "░", "O"],
-  ["░", "O", "░"],
-  ["░", "^", "░"],
-]);
+const myField = new Field(Field.generateField(4,4));
 
 let status = 0;
 let playerPosition = [0, 0];
+
+console.log(Field.generateField(5,5));
 
 while (status == 0) {
   myField.print();
@@ -88,7 +139,7 @@ while (status == 0) {
       break;
 
     case fieldCharacter:
-        console.clear();
+      console.clear();
       myField.array[playerPosition[0]][playerPosition[1]] = pathCharacter;
       break;
 
