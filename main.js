@@ -35,34 +35,43 @@ const myField = new Field([
 let status = 0;
 let playerPosition = [0, 0];
 
-
 while (status == 0) {
   myField.print();
   const move = prompt("Where do you want to go? (u,d,l,r)?");
-  switch(move){
-    case 'u':
-    playerPosition[0]=playerPosition[0]+1;
-    break;
+  switch (move) {
+    case "u":
+      if (playerPosition[0] - 1 < 0) {
+        console.log("You are outside of the grid!");
+        status = 1;
+      } else {
+        playerPosition[0] = playerPosition[0] - 1;
+      }
+      break;
 
-    case 'd':
-    playerPosition[0]=playerPosition[0]-1
-    break;
+    case "d":
+      playerPosition[0] = playerPosition[0] + 1;
+      break;
 
-    case 'r':
-    playerPosition[1]=playerPosition[1]+1;
-    break;
+    case "r":
+      playerPosition[1] = playerPosition[1] + 1;
+      break;
 
-    case 'l':
-    playerPosition[1]=playerPosition[1]-1;
-    break;
+    case "l":
+      if (playerPosition[1] - 1 < 0) {
+        console.log("You are outside of the grid!");
+        status = 1;
+      } else {
+        playerPosition[1] = playerPosition[1] - 1;
+      }
 
-    case 'q':
-        status=1;
-        break;
+      break;
+
+    case "q":
+      status = 1;
+      break;
   }
 
-
-
+  if (myField.array[playerPosition[0]][playerPosition[1]] == undefined) {
+    console.log("You are outside of the grid!");
+  }
 }
-
-
