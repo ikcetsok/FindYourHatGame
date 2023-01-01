@@ -80,12 +80,10 @@ class Field {
   }
 }
 
-const myField = new Field(Field.generateField(4,4));
+const myField = new Field(Field.generateField(6,6));
 
 let status = 0;
 let playerPosition = [0, 0];
-
-console.log(Field.generateField(5,5));
 
 while (status == 0) {
   myField.print();
